@@ -1,26 +1,45 @@
 import './App.css';
 import { useState } from 'react';
 import NavbarComponent from './components/NavbarComponent';
-import SearchBarComponent from './components/SearchBarComponent';
+import Profile from './components/Profile';
+import { Container } from 'react-bootstrap';
+import LoginPage from './components/LoginPage';
+import SignUpPage from './components/SignUpPage';
+import AccountPage from './components/AccountPage';
+// import SearchBarComponent from './components/SearchBarComponent';
 
 function App() {
-  const [searchResults, setSearchResults] = useState([]);
-  
-  const handleSearch = (query) => {
-    // Here, you can implement the logic to perform a search
-    // For simplicity, let's assume we're just updating state with some mock results
-    const mockResults = [
-      { id: 1, name: 'Result 1' },
-      { id: 2, name: 'Result 2' },
-    ];
 
-    setSearchResults(mockResults);
-    console.log(mockResults)
-  };
+  const user = {
+    username: "ganga",
+    firstName: "Ganga",
+    lastName: "Singh",
+    email: "gangasingh@gmail.com",
+    skills: [{
+      skillName: "React",
+      description: "lskdjf slkjf s;lkfdjs;k fjs;kldfjs;lkdfj sl;dkf jsdlkf",
+    },
+    {
+      skillName: "Nodejs",
+      description: "lskdjf slkjf s;lkfdjs;k fjs;kldfjs;lkdfj sl;dkf jsdlkf",
+    },
+    {
+      skillName: "MongoDB",
+      description: "lskdjf slkjf s;lkfdjs;k fjs;kldfjs;lkdfj sl;dkf jsdlkf",
+    }],
+    connectedUsers: []
+  }
+
   return (
     <div>
       <NavbarComponent />
-      <SearchBarComponent onSearch={handleSearch}/>
+      <Container>
+        {/* <SearchBarComponent onSearch={handleSearch}/> */}
+        {/* <LoginPage />*/}
+        <SignUpPage />
+        {/* <Profile user={user} /> */}
+        {/* <AccountPage /> */}
+      </Container>
     </div>
   );
 }
