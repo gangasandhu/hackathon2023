@@ -1,11 +1,17 @@
 import './App.css';
 import { useState } from 'react';
 import NavbarComponent from './components/NavbarComponent';
+import Profile from './components/Profile';
+import { Container } from 'react-bootstrap';
+import LoginPage from './components/LoginPage';
+import SignUpPage from './components/SignUpPage';
+import AccountPage from './components/AccountPage';
 import SearchBarComponent from './components/SearchBarComponent';
 import Content from './components/Content'
 import searchResults from './atoms/searchResults';
 import { useRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
+// import SearchBarComponent from './components/SearchBarComponent';
 
 
 function App() {
@@ -35,6 +41,10 @@ function App() {
         <NavbarComponent />
         <SearchBarComponent onSearch={handleSearch} />
         <Content />
+        {/* <SearchBarComponent onSearch={handleSearch}/> */}
+        {/* <LoginPage />*/}
+        {/* <Profile user={user} /> */}
+        {/* <AccountPage /> */}
     </div>
   );
 }
