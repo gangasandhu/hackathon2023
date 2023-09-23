@@ -1,7 +1,7 @@
 import './App.css';
 import { useState } from 'react';
 import NavbarComponent from './components/NavbarComponent';
-import SearchBar from './components/SearchBar';
+import SearchBarComponent from './components/SearchBarComponent';
 
 function App() {
   const [searchResults, setSearchResults] = useState([]);
@@ -20,7 +20,7 @@ function App() {
   return (
     <div>
       <NavbarComponent />
-      <SearchBar onSearch={handleSearch}/>
+      <SearchBarComponent onSearch={handleSearch}/>
     </div>
   );
 }
