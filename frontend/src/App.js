@@ -2,25 +2,39 @@ import './App.css';
 import { useState } from 'react';
 import NavbarComponent from './components/NavbarComponent';
 import SearchBarComponent from './components/SearchBarComponent';
+import Content from './components/Content'
+import searchResults from './atoms/searchResults';
+import { useRecoilState } from 'recoil';
+import { useNavigate } from 'react-router-dom';
+
 
 function App() {
-  const [searchResults, setSearchResults] = useState([]);
-  
+  const [users, setUsers] = useRecoilState(searchResults);
+  const navigate = useNavigate()
+
+
   const handleSearch = (query) => {
     // Here, you can implement the logic to perform a search
     // For simplicity, let's assume we're just updating state with some mock results
     const mockResults = [
-      { id: 1, name: 'Result 1' },
-      { id: 2, name: 'Result 2' },
-    ];
+      { _id: 1, username: 'Result 1',favorite:true, firstname:'result', lastname:'1',skills:[{name:'Python',imageLink:'https://codeop.tech/wp-content/uploads/2021/11/artturi-jalli-g5_rxRjvKmg-unsplash-scaled.jpg'}]},
+      { _id: 2, username: 'Result 2',favorite:true, firstname:'result', lastname:'2',skills:[{name:'Java',imageLink:'https://codeop.tech/wp-content/uploads/2021/11/artturi-jalli-g5_rxRjvKmg-unsplash-scaled.jpg'}]}
+    ]
 
-    setSearchResults(mockResults);
-    console.log(mockResults)
+    if (query) {
+      console.log("searching user")
+      setUsers([mockResults[0]])
+    }
+    else {
+      navigate('/')
+      setUsers(mockResults)
+    }
   };
   return (
     <div>
-      <NavbarComponent />
-      <SearchBarComponent onSearch={handleSearch}/>
+        <NavbarComponent />
+        <SearchBarComponent onSearch={handleSearch} />
+        <Content />
     </div>
   );
 }
