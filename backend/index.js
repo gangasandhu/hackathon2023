@@ -131,15 +131,21 @@ app.get("/skill-search", async (req, res, next) => {
     const searchArray = await database.Users.find({
       skills: { $in: skills.map((x) => x._id) },
     }).populate("skills");
+    console.log(searchArray);
     if (searchArray.length === 0) {
-      res.status(404).json({ message: "No users with this skill found" });
+      res.status(404).json([{ message: "No users with this skill found" }]);
       return;
     }
-    res.status(200).json(searchArray.map((x) => ({ ...x._doc, password: "" })));
+    res.status(200).json(searchArray);
   } catch (e) {
     next(e);
   }
 });
+app.get('/all-users',async(req,res,next)=>{
+  console.log("all users");
+  const users = await database.Users.find();
+  res.status(200).json(users)
+})
 
 app.post(
   "/create-skill",
@@ -186,7 +192,8 @@ app.post(
 app.get("/userData/:username", async (req, res, next) => {
   try {
     const username = req.params.username;
-    const userDetails = await database.Users.findOne(username);
+    console.log(username);
+    const userDetails = await database.Users.findOne({username});
     if (userDetails) {
       console.log(userDetails);
       res.status(200).json({

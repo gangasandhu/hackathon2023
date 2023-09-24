@@ -129,7 +129,11 @@ async function updateUser() {
   const x = await request.json();
   console.log(x);
 }
+async function aaa(){
+    const r=await fetch('http://localhost:3000/allUsers')
+}
 // markFavorite();
 // abcd();
 // acceptReq();
-updateUser();
+// updateUser();
+// xyz();

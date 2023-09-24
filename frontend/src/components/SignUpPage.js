@@ -20,6 +20,8 @@ function SignUpPage() {
         event.preventDefault();
         try {
             const response = await axios.post(url, formData);
+            const {token} = response.json();
+            localStorage.setItem('token',token);
 
             console.log('Signup Successful:', response.data);
         } catch (error) {

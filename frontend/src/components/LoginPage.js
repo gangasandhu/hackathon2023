@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
-import { Container, Form, Button } from 'react-bootstrap';
-import axios from 'axios';
-
+import React, { useState } from "react";
+import { Container, Form, Button } from "react-bootstrap";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   });
 
-  const url = 'https://localhost:3000/login'
+  const url = "https://localhost:3000/login";
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -19,12 +20,17 @@ function LoginPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(url, formData);
-
-      console.log('Login Successful:', response.data);
-
+      const response = await fetch("http://localhost:3000/login", {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body:JSON.stringify(formData)
+      });
+      const { token } = await response.json();
+      localStorage.setItem("token", token);
+      console.log("Login Successful:", response.data);
+      navigate('/')
     } catch (error) {
-      console.error('Login Error:', error);
+      console.error("Login Error:", error);
     }
   };
 
